@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles/bootstrap.css" rel="stylesheet">
+    <script src="js/bootstrap.js"></script>
+    <title>Gerenciador de Tarefas</title>
+</head>
+
+<body>
+    <header>
+        <div class="title">
+            <h2>Lista de Tarefas</h2>
+        </div>
+        <div class="banner">
+            <img src="imagens/task_manager.jpg" alt="Gerenciador">
+        </div>
+    </header>
+
+    <section class="novoItem">
+        <div class="mb-3">
+            <label for="novoTitulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="novoTitulo" placeholder="digite aqui seu título">
+          </div>
+          <div class="mb-3">
+            <label for="novaDescricao" class="form-label">Descrição</label>
+            <input type="text" class="form-control" id="novaDescricao" placeholder="descrição da sua tarefa">
+          </div>
+          <button type="submit" class="btn btn-primary" onclick="newItem()">Adicionar</button>
+    </section>
+
+    <section class="items">
+        <table id="myTable" class="table table-striped">
+            <tr class="text-center">
+                <th>Tarefa</th>
+                <th>Descrição</th>
+                <th>Concluído</th>
+                <th>Excluir</th>
+            </tr>
+        </table>
+    </section>
+
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>
+
+
