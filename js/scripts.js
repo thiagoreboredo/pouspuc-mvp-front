@@ -138,10 +138,12 @@ const insertList = (tarefa, descricao, concluido) => {
   let conteudoCelula = "";
   for (var i = 0; i < item.length; i++) {
     if (i == 2) {
-      if (item[i] == "true") {
+      if (item[i]) {
         conteudoCelula = "<img src='imagens/bookmark-check-fill.svg'></img>";
       } else {
-        conteudoCelula = "<img src='imagens/bookmark.svg'></img>";
+        conteudoCelula = "<a href='#'>";
+        conteudoCelula += "<img id='btn_concluir_" + tarefa.replace(" ","") + "' src='imagens/bookmark.svg' onclick=concluirTarefa('" + tarefa + "')></img>";
+        conteudoCelula += "</a>";
       }
     } else {
       conteudoCelula = item[i];
@@ -154,4 +156,32 @@ const insertList = (tarefa, descricao, concluido) => {
   document.getElementById("novaDescricao").value = "";
 
   removeElement()
+}
+
+/*
+  --------------------------------------------------------------------------------------
+  Função para concluir tarefa na lista apresentada
+  --------------------------------------------------------------------------------------
+*/
+const concluirTarefa = (item) => {
+  let url = 'http://127.0.0.1:5000/tarefa?titulo=' + item;
+  fetch(url, {
+    method: 'put'
+  })
+  .then((response) => { 
+    if (response.status == "404") { 
+      alert("Tarefa não encontrada !")
+    } else {
+      (response) => response.json();
+      alert("Tarefa Concluída!");
+
+      let concluir = document.getElementById("btn_concluir_" + item.replace(" ",""));
+      console.log(concluir);
+      concluir.onclick="";
+      concluir.src="imagens/bookmark-check-fill.svg";
+    }
+   })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
 }
