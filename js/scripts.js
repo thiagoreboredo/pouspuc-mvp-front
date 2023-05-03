@@ -142,7 +142,7 @@ const insertList = (tarefa, descricao, concluido) => {
         conteudoCelula = "<img src='imagens/bookmark-check-fill.svg'></img>";
       } else {
         conteudoCelula = "<a href='#'>";
-        conteudoCelula += "<img id='btn_concluir_" + tarefa.replace(" ","") + "' src='imagens/bookmark.svg' onclick=concluirTarefa('" + tarefa + "')></img>";
+        conteudoCelula += "<img id='btn_concluir_" + tarefa.replace(" ","$") + "' src='imagens/bookmark.svg' onclick=concluirTarefa('" + tarefa.replace(" ","$") + "')></img>";
         conteudoCelula += "</a>";
       }
     } else {
@@ -164,7 +164,7 @@ const insertList = (tarefa, descricao, concluido) => {
   --------------------------------------------------------------------------------------
 */
 const concluirTarefa = (item) => {
-  let url = 'http://127.0.0.1:5000/tarefa?titulo=' + item;
+  let url = 'http://127.0.0.1:5000/tarefa?titulo=' + item.replace("$"," ");
   fetch(url, {
     method: 'put'
   })
@@ -175,8 +175,7 @@ const concluirTarefa = (item) => {
       (response) => response.json();
       alert("Tarefa Concluída!");
 
-      let concluir = document.getElementById("btn_concluir_" + item.replace(" ",""));
-      console.log(concluir);
+      let concluir = document.getElementById("btn_concluir_" + item);
       concluir.onclick="";
       concluir.src="imagens/bookmark-check-fill.svg";
     }
